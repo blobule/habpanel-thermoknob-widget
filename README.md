@@ -15,8 +15,6 @@ Most graphics are ajustable as in the knob widget (see [ng-knob](https://github.
 
 ## Screenshot
 
-Here is 8 of them...
-
 ![screenshot](img/thermo-habpanel.png)
 
 ## Settings
@@ -36,4 +34,5 @@ For openraspbian, just do
 
 `cp -r thermoKnob /etc/openhab2/html/`
 
-If you install the file elsewhere, make sure you adjust the widget [](thermo-knob.widget.json) file accordingly.
+If you install the file elsewhere, make sure you adjust the widget [thermo-knob.widget.json](thermo-knob.widget.json) file accordingly.
+
