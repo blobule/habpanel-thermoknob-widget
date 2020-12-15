@@ -7,4 +7,5 @@ Allows adjusting setpoint temperature while viewing current room temperature and
 
 ## Example
 
-![screenshot](img/thermo1.png)
+![screenshot](img/thermo-habpanel.png)
+
