@@ -11,6 +11,6 @@ Allows adjusting setpoint temperature while viewing current room temperature and
 
 ## Example
 
-![example](thermoKnob/index.html)
+![example](thermoKnob/)
 
 
