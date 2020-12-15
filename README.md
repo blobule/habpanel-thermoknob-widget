@@ -15,7 +15,13 @@ Most graphics are ajustable as in the knob widget (see [ng-knob](https://github.
 
 ## Screenshot
 
+Here is 8 of them...
+
 ![screenshot](img/thermo-habpanel.png)
+
+## Settings
+
+![settings](img/thermo-settings.png)
 
 ## Example
 
