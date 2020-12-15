@@ -5,7 +5,12 @@ Allows adjusting setpoint temperature while viewing current room temperature and
 
 ## Features
 
-## Example
+## Screenshot
 
 ![screenshot](img/thermo-habpanel.png)
+
+## Example
+
+![example](thermoKnob/index.html)
+
 
