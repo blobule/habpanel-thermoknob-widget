@@ -25,7 +25,7 @@ Most graphics are ajustable as in the knob widget (see [ng-knob](https://github.
 
 ## Demo
 
-A standalone demo is provide in [thermoKnob/index.html](thermoKnob/index.html)
+A standalone demo is provided in [thermoKnob/index.html](thermoKnob/index.html)
 
 ## Installing
 
