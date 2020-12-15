@@ -19,11 +19,13 @@ Most graphics are ajustable as in the knob widget (see [ng-knob](https://github.
 
 ## Settings
 
+(sorry for the mixture of languages)
+
 ![settings](img/thermo-settings.png)
 
-## Example
+## Demo
 
-[live example](thermoKnob/)
+A standalone demo is provide in [thermoKnob/index.html](thermoKnob/index.html)
 
 ## Installing
 
