@@ -1,0 +1,88 @@
+<html>
+	<head>
+	<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>
+<script src="ng-knob-thermo.js"></script>
+<script>
+angular
+    .module('KnobDemoApp', ['ui.knobthermo'])
+    .controller('knobCtrl', monControl);
+
+monControl.$inject = ['$scope'];
+function monControl($scope) {
+	$scope.value = 21; // tracking/commanding config.setpoint
+	$scope.current=18; // tracking config.current
+	$scope.heating=0; // tracking config.heating
+	$scope.label=""; // tracking config.label
+	$scope.options = {
+		  skin: {
+			  type: 'simple',
+			  color: '#919191', //'ff6060' // observed
+			  width:20,
+			  spaceWidth:0,
+			  startAngle:-120,
+			  endAngle:120
+		  },
+		  trackWidth: 50,
+		  trackColor: '#919191',
+		  trackColorFull: '#91919130',
+		  barWidth: 20,
+		  subText: {
+			enabled: true,
+			text: '21°',
+		        color: '#919191', // current
+		        font: 'auto'
+		  },
+		  min: 5,
+		  max: 35,
+		  step: 1,
+		  prevBarColor: 'rgba(0,0,1,.2)',
+		  displayPrevious: true,
+		  barColor: '#FFAE1A', // setpoint
+		  textColor: '#d59116', // setpoint
+		  startAngle:$scope.label!=""?-120:-150,
+		  endAngle:  $scope.label!=""? 120: 150,
+		  scale: {
+			enabled: true,
+			type: 'lines',
+			width: 4,
+			spaceWidth:8,
+			quantity: 31
+		  },
+	  	  unit: "°",
+                  dynamicOptions: true,
+		  label: {
+			  enabled: $scope.label!="",
+			  text: $scope.label,
+			  color:"#e0e0e0",
+			  fontSize:"auto"
+		  },
+		  onEnd: function () {
+			console.log("value changed to "+$scope.value);
+		  }
+                };
+}
+</script>
+	</head>
+
+
+<body>
+
+<div ng-app="KnobDemoApp">
+  <div style="background-color:#303030; position: absolute; top: 0; left: 0; width: 300px; height: 300px;">
+  <div ng-controller="knobCtrl" style="background-color:#202020;">
+    <span style="color:white;">values are {{value}}, {{current}}, {{heating}}</span><p></p>
+    <button ng-click="value=value-1">set -</button>
+    <button ng-click="value=value+1">set +</button><p/>
+    <button ng-click="current=current-1">now -</button>
+    <button ng-click="current=current+1">now +</button><p/>
+    <button ng-click="heating=1">Heat 1</button>
+    <button ng-click="heating=0">Heat 0</button></p>
+    <ui-knob-thermo value="value" options="options" current="current" heating="heating"></ui-knob-thermo>
+  </div>
+  </div>
+</div>
+
+</body>
+</html>

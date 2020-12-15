@@ -1,0 +1,32 @@
+{
+    "template": "<div oc-lazy-load=\"['/static/thermoKnob/ng-knob-thermo.js','/static/thermoKnob/control-oh.js']\"  style=\"position: absolute; top: 10px; left: 10px; width: calc(100% - 20px); height: calc(100% - 20px);\">\n  <div ng-controller=\"knobCtrlOH\">\n    <ui-knob-thermo value=\"value\" current=\"current\" heating=\"heating\" options=\"options\" config=\"config\"></ui-knob-thermo>\n  </div>\n</div>\n",
+    "name": "Thermostat Knob",
+    "author": "Sébastien Roy",
+    "description": "Thermostat Knob, showing current temperature, set point and heating state, with optional label",
+    "settings": [
+        {
+            "type": "string",
+            "id": "label",
+            "label": "Label",
+            "description": "Label for the widget, if desired"
+        },
+        {
+            "type": "item",
+            "id": "current",
+            "label": "Current temperature",
+            "description": "Current temperature item"
+        },
+        {
+            "type": "item",
+            "id": "setpoint",
+            "label": "Thermostat set point",
+            "description": "Thermostat set point, the value that can be adjusted"
+        },
+        {
+            "type": "item",
+            "id": "heating",
+            "label": "Thermostat heating state",
+            "description": "Thermostat heating state, expecting 0/1 values"
+        }
+    ]
+}
