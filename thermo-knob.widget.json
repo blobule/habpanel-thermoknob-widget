@@ -27,6 +27,34 @@
             "id": "heating",
             "label": "Thermostat heating state",
             "description": "Thermostat heating state, expecting 0/1 values"
+        },
+        {
+            "type": "string",
+            "id": "barcolor",
+            "label": "Set Point Color",
+            "default": "#FFAE1A",
+            "description": "Color of the set point bar and set point text. (Use #0DB9F0 for standard habpanel blue)"
+        },
+        {
+            "type": "string",
+            "id": "min",
+            "label": "Minimum value",
+            "description": "Minimum temperature value",
+            "default": "5"
+        },
+        {
+            "type": "string",
+            "id": "max",
+            "label": "Maximum value",
+            "default": "35",
+            "description": "Maximum temperature value"
+        },
+        {
+            "type": "string",
+            "id": "step",
+            "label": "Step value",
+            "default": "1",
+            "description": "Temperature scale steps. One tick will be drawn at each step, from min to max temperature."
         }
     ]
 }

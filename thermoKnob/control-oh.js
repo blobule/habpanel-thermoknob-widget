@@ -22,9 +22,10 @@ function monControlOH($scope,OHService) {
 	//console.log("$scope is "+JSON.stringify(Object.keys($scope),null,4));
 	var hasConfig=(typeof $scope.config != 'undefined' );
 	var hasLabel=false;
-	if( hasConfig ) {
-		hasLabel=($scope.config.label!=="");
-	}
+	if( hasConfig ) { hasLabel=($scope.config.label!==""); }
+	var leMin=hasConfig?parseFloat($scope.config.min):5;
+	var leMax=hasConfig?parseFloat($scope.config.max):35;
+	var leStep=hasConfig?parseFloat($scope.config.step):1;
 	/*
 	console.log("config label is set to "+$scope.config.label+ " nonvide "+hasLabel);
 	console.log("config current is set to "+$scope.config.current);
@@ -54,13 +55,13 @@ function monControlOH($scope,OHService) {
 		        color: '#919191', // current
 		        font: 'auto'
 		  },
-		  min: 5,
-		  max: 35,
-		  step: 1,
+		  min: leMin,
+		  max: leMax,
+		  step: leStep,
 		  prevBarColor: 'rgba(0,0,1,.2)',
 		  displayPrevious: true,
-		  barColor: '#FFAE1A', // setpoint
-		  textColor: '#d59116', // setpoint
+		  barColor: hasConfig?$scope.config.barcolor:'#FFAE1A', // setpoint
+		  textColor: hasConfig?$scope.config.barcolor:'#FFAE1A', // setpoint
 		  startAngle:hasLabel?-120:-150,
 		  endAngle:  hasLabel? 120: 150,
 		  scale: {
@@ -68,7 +69,7 @@ function monControlOH($scope,OHService) {
 			type: 'lines',
 			width: 4,
 			spaceWidth:8,
-			quantity: 31
+			quantity: (leMax-leMin)/leStep+1   // one bar per step, from min to max
 		  },
 	  	  unit: "°",
                   dynamicOptions: true,

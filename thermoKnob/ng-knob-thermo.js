@@ -23,22 +23,25 @@
   };
   /**
    *   Convert from value to radians
+   *   value: [valueStart..valueEnd]->[angleStart..angleEnd]
    */
   Knob.prototype.valueToRadians = function(value, valueEnd, angleEnd, angleStart, valueStart) {
-    valueEnd = valueEnd || 100;
     valueStart = valueStart || 0;
-    angleEnd = angleEnd || 360;
-    angleStart = angleStart || 0;
-    return (Math.PI/180) * ((((value - valueStart) * (angleEnd - angleStart)) / (valueEnd - valueStart)) + angleStart);
+    valueEnd = valueEnd || 100;
+    angleStart = angleStart || -180;
+    angleEnd = angleEnd || 180;
+    var frac=(value-valueStart)/(valueEnd-valueStart);
+    frac=Math.min(1,Math.max(0,frac)); // limit to current range
+    return (Math.PI/180) * ((frac * (angleEnd - angleStart)) + angleStart);
   };
   /**
    *   Convert from radians to value
    */
   Knob.prototype.radiansToValue = function(radians, valueEnd, valueStart, angleEnd, angleStart) {
-    valueEnd = valueEnd || 100;
     valueStart = valueStart || 0;
-    angleEnd = angleEnd || 360;
-    angleStart = angleStart || 0;
+    valueEnd = valueEnd || 100;
+    angleStart = angleStart || -180;
+    angleEnd = angleEnd || 180;
     return ((((((180/Math.PI) * radians) - angleStart) * (valueEnd - valueStart)) / (angleEnd - angleStart)) + valueStart);
   };
   /**
@@ -78,8 +81,8 @@
    */
   Knob.prototype.createArcs = function() {
     var outerRadius = parseInt((300/2), 10),
-    startAngle = this.valueToRadians(this.options.startAngle, 360),
-    endAngle = this.valueToRadians(this.options.endAngle, 360);
+    startAngle = this.valueToRadians(this.options.startAngle, 180,180,-180,-180),
+    endAngle = this.valueToRadians(this.options.endAngle, 180,180,-180,-180);
 
 
     if(this.options.scale.enabled) {
@@ -123,9 +126,7 @@
       valueOuterRadius = valueOuterRadius - this.options.skin.width - this.options.skin.spaceWidth;
       interactOuterRadius = interactOuterRadius - this.options.skin.width - this.options.skin.spaceWidth;
 	    // ici ca change...
-	//var startAngleHoop = this.valueToRadians(this.options.skin.startAngle, 360);
-	//var endAngleHoop = this.valueToRadians(this.options.skin.endAngle, 360);
-	var startAngleHoop = this.valueToRadians(this.options.startAngle, 360);
+	var startAngleHoop = this.valueToRadians(this.options.startAngle, 180,180,-180,-180);
         var endAngleHoop = this.valueToRadians(this.current, this.options.max, this.options.endAngle, this.options.startAngle, this.options.min);
 
       this.hoopArc = this.createArc(outerRadius - this.options.skin.width, outerRadius, startAngleHoop, endAngleHoop);
@@ -309,7 +310,7 @@
 
     if(that.options.animate.enabled) {
       that.valueElem.transition().ease(that.options.animate.ease).duration(that.options.animate.duration).tween('',function() {
-        var i = d3.interpolate(that.valueToRadians(that.options.startAngle, 360), that.valueToRadians(that.value, that.options.max, that.options.endAngle, that.options.startAngle, that.options.min));
+        var i = d3.interpolate(that.valueToRadians(that.options.startAngle, 180,180,-180,-180), that.valueToRadians(that.value, that.options.max, that.options.endAngle, that.options.startAngle, that.options.min));
         return function(t) {
           var val = i(t);
           that.valueElem.attr('d', that.valueArc.endAngle(val));
@@ -425,7 +426,7 @@
 	//var elParent=element[0].parentElement;
 	//var size=Math.min(elParent.clientWidth,elParent.clientHeight); // not used!!!
 
-	scope.current=scope.current || 14;
+	scope.current=scope.current || 13;
         scope.value = scope.value || 14;
         var defaultOptions = {
           skin: {
