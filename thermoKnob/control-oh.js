@@ -67,7 +67,10 @@ function monControlOH($scope,OHService) {
 		  scale: {
 			enabled: true,
 			type: 'lines',
+            		color: '#919191',  // not heating
+			colorH: '#ff4040', // heating
 			width: 4,
+            		height: 10,
 			spaceWidth:8,
 			quantity: (leMax-leMin)/leStep+1   // one bar per step, from min to max
 		  },

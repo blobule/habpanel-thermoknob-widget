@@ -18,13 +18,15 @@ The widget can be configured in habpanel:
 - The temperature scale is configurable (min, max, step).
 - The color of the setpoint temperature can be changed.
 
-Other parameters must be configured *manually*:
-- The *heating color* is the *colorH* setting inside file ng-knob-thermo.js
-- Other parameters can be adjusted as in the knob widget (see [ng-knob](https://github.com/RadMie/ng-knob) )
-
+Other parameters must be configured *manually* in file ``control-OH.js``:
+- The *heating color* is from the *scale* settings *color* and *colorH*
+- The font sizes, width, height, and other parameters are also available in the options definition.
+- For reference, see the knob widget ( [ng-knob](https://github.com/RadMie/ng-knob) )
 
 
 ## Screenshot
+
+![screenshot](img/thermo3.png)
 
 ![screenshot](img/thermo-habpanel.png)
 
