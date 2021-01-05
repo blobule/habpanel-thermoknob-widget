@@ -10,8 +10,19 @@ The thermo-knob connects to 3 openhab items:
 - Current temperature, displayed only
 - Current heating state (0/1), displayed only
 
-There is also an optional label.
-Most graphics are ajustable as in the knob widget (see [ng-knob](https://github.com/RadMie/ng-knob) )
+
+### Parameters
+
+The widget can be configured as follow:
+- An optional label can be added to the widget.
+- The temperature scale is configurable (min, max, step).
+- The color of the setpoint temperature can be changed.
+
+Other parameters that must be changed *manually*:
+- you can change the *heating color* by changing the *colorH* setting inside file ng-knob-thermo.js
+- Other parameters can be adjusted as in the knob widget (see [ng-knob](https://github.com/RadMie/ng-knob) )
+
+
 
 ## Screenshot
 
