@@ -26,10 +26,12 @@ function monControlOH($scope,OHService) {
 	var leMin=hasConfig?parseFloat($scope.config.min):5;
 	var leMax=hasConfig?parseFloat($scope.config.max):35;
 	var leStep=hasConfig?parseFloat($scope.config.step):1;
+	/*
 	if( hasConfig ) {
 		console.log("Config is "+JSON.stringify(Object.keys($scope.config),null,4));
 		console.log("  and label is "+$scope.config.label);
 	}else console.log("Config is not available");
+	*/
 	/*
 	console.log("config label is set to "+$scope.config.label+ " nonvide "+hasLabel);
 	console.log("config current is set to "+$scope.config.current);
@@ -89,9 +91,7 @@ function monControlOH($scope,OHService) {
 		  onEnd: function () {
 			if( hasConfig ) {
 				OHService.sendCmd($scope.config.setpoint,$scope.value.toString());
-			}else{
-				console.log("value changed to "+$scope.value);
-			}
+			} /*else{ console.log("value changed to "+$scope.value); } */
 		  }
                 };
 	if( hasConfig ) {
