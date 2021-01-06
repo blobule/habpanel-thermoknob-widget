@@ -26,6 +26,10 @@ function monControlOH($scope,OHService) {
 	var leMin=hasConfig?parseFloat($scope.config.min):5;
 	var leMax=hasConfig?parseFloat($scope.config.max):35;
 	var leStep=hasConfig?parseFloat($scope.config.step):1;
+	if( hasConfig ) {
+		console.log("Config is "+JSON.stringify(Object.keys($scope.config),null,4));
+		console.log("  and label is "+$scope.config.label);
+	}else console.log("Config is not available");
 	/*
 	console.log("config label is set to "+$scope.config.label+ " nonvide "+hasLabel);
 	console.log("config current is set to "+$scope.config.current);
@@ -91,32 +95,42 @@ function monControlOH($scope,OHService) {
 		  }
                 };
 	if( hasConfig ) {
-	//
-	// item tracking... here we track current/setpoint/heating
-	//
-	OHService.onUpdate($scope, $scope.config.current, function () {
-		var item = OHService.getItem($scope.config.current);
-		if (item) {
-			$scope.current = parseFloat(item.state);
-			//console.log("Update! item "+$scope.config.current+" has changed to "+$scope.current);
-		}
-	});
-
-	OHService.onUpdate($scope, $scope.config.setpoint, function () {
-		var item = OHService.getItem($scope.config.setpoint);
-		if (item) {
-			$scope.value = parseFloat(item.state);
-			//console.log("Update! item "+$scope.config.setpoint+" has changed to "+$scope.value);
-		}
-	});
-
-	OHService.onUpdate($scope, $scope.config.heating, function () {
-		var item = OHService.getItem($scope.config.heating);
-		if (item) {
-			$scope.heating = item.state;
-			//console.log("Update! item "+$scope.config.heating+" has changed to "+$scope.heating);
-		}
-	});
+		//
+		// Update items functions...
+		//
+		var updateCurrent=function() {
+			var item = OHService.getItem($scope.config.current);
+			if (item) {
+				$scope.current = parseFloat(item.state);
+				//console.log("Update! item "+$scope.config.current+" has changed to "+$scope.current);
+			}
+		};
+		var updateSetpoint=function () {
+			var item = OHService.getItem($scope.config.setpoint);
+			if (item) {
+				$scope.value = parseFloat(item.state);
+				//console.log("Update! item "+$scope.config.setpoint+" has changed to "+$scope.value);
+			}
+		};
+		var updateHeating=function () {
+			var item = OHService.getItem($scope.config.heating);
+			if (item) {
+				$scope.heating = item.state;
+				//console.log("Update! item "+$scope.config.heating+" has changed to "+$scope.heating);
+			}
+		};
+		//
+		// Initial starting values... dont wait for update.
+		//
+		updateCurrent();
+		updateSetpoint();
+		updateHeating();
+		//
+		// item tracking... here we track current/setpoint/heating
+		//
+		OHService.onUpdate($scope, $scope.config.current, updateCurrent);
+		OHService.onUpdate($scope, $scope.config.setpoint, updateSetpoint);
+		OHService.onUpdate($scope, $scope.config.heating, updateHeating);
 	} // hasConfig
 
 }
