@@ -54,7 +54,7 @@
             "id": "step",
             "label": "Step value",
             "default": "1",
-            "description": "Temperature scale steps. One tick will be drawn at each step, from min to max temperature."
+            "description": "Temperature scale steps. One tick will be drawn at each step, from min to max temperature. Suggested values : 1 or 0.5."
         }
     ]
 }

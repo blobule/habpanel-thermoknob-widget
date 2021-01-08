@@ -172,19 +172,19 @@
     if(this.options.displayInput) {
       var fontSize = 72;
       if(this.options.fontSize !== 'auto') { fontSize = parseInt(this.options.fontSize); }
-      if(this.options.step < 1) {
-        this.value = parseFloat(this.value).toFixed(1);
-      }
-      var v = this.value;
+      var v = this.value.toFixed(0);
       if (typeof this.options.inputFormatter === "function"){
-          v = this.options.inputFormatter(v);
+          v = this.options.inputFormatter(this.value);
+      }else if( this.options.step < 1) {
+	  fontSize=fontSize*0.8; // smaller when we have decimal
+	  v = this.value.toFixed(1);
       }
       svg.append('text')
       .attr('id', 'text')
       .attr("text-anchor", "middle")
       .attr("font-size", fontSize+"px")
       .style("fill", this.options.textColor)
-      .text(v + this.options.unit || "")
+      .text(v + ""+this.options.unit || "")
       .attr('transform', 'translate(' + (300/2) + ', ' + ((300/2)+0 ) + ')');
 
       if(this.options.subText.enabled) {
@@ -192,13 +192,20 @@
         if(this.options.subText.font !== 'auto') {
           fontSize = parseInt(this.options.subText.font);
         }
+	      // we keep 1 decimal or 0 if integer
+        var v = Math.round(this.current*10)/10;
+        if (typeof this.options.inputFormatter === "function"){
+          v = this.options.inputFormatter(this.current);
+        }else if( this.options.step < 1) {
+	  v = v.toFixed(1);
+        }
         svg.append('text')
         .attr('class', 'sub-text')
         .attr("text-anchor", "middle")
         .attr("font-size", fontSize+"px")
         .style("fill", this.options.subText.color)
         //.text(this.options.subText.text)
-        .text(this.current+this.options.unit || "")
+        .text(v+""+this.options.unit || "")
         .attr('transform', 'translate(' + (300/2) + ', ' + ((300/2) + fontSize) + ')');
       }
     }
@@ -354,10 +361,12 @@
       radians = (delta + arc) * (Math.PI/180);
       that.value = that.radiansToValue(radians, that.options.max, that.options.min, that.options.endAngle, that.options.startAngle);
       if(that.value >= that.options.min && that.value <= that.options.max) {
-        that.value = Math.round(((~~ (((that.value < 0) ? -0.5 : 0.5) + (that.value/that.options.step))) * that.options.step) * 100) / 100;
-        if(that.options.step < 1) {
+        //that.value = Math.round(((~~ (((that.value < 0) ? -0.5 : 0.5) + (that.value/that.options.step))) * that.options.step) * 100) / 100;
+        that.value = Math.round(that.value/that.options.step)*that.options.step;
+        /*if(that.options.step < 1) {
           that.value = parseFloat(that.value.toFixed(1));
-        }
+	  v = this.value.toFixed(1);
+        }*/
         update(that.value);
         that.valueArc.endAngle(that.valueToRadians(that.value, that.options.max, that.options.endAngle, that.options.startAngle, that.options.min));
         that.valueElem.attr('d', that.valueArc);
@@ -366,11 +375,13 @@
           that.changeElem.attr('d', that.changeArc);
         }
         if(that.options.displayInput) {
-          var v = that.value;
-          if (typeof that.options.inputFormatter === "function"){
-            v = that.options.inputFormatter(v);
-          }
-          d3.select(that.element).select('#text').text(v + that.options.unit || "");
+	      var v = that.value.toFixed(0);
+	      if (typeof that.options.inputFormatter === "function"){
+		  v = that.options.inputFormatter(that.value);
+	      }else if( that.options.step < 1) {
+		  v = that.value.toFixed(1);
+	      }
+              d3.select(that.element).select('#text').text(v + that.options.unit || "");
         }
         if(isFinal) {
 	    if( that.options.onEnd ) { that.options.onEnd(); }
@@ -379,25 +390,29 @@
     }
   };
   /**
-   *   Set a value
+   *   Set a value. Assume any junk can be set here (any type)
    */
   Knob.prototype.setValue = function(newValue) {
+    newValue=parseFloat(newValue);
     if ( !this.inDrag ) {
       var radians = this.valueToRadians(newValue, this.options.max, this.options.endAngle, this.options.startAngle, this.options.min);
-      this.value = Math.round(((~~ (((newValue < 0) ? -0.5 : 0.5) + (newValue/this.options.step))) * this.options.step) * 100) / 100;
+      this.value = Math.round(newValue/this.options.step)*this.options.step;
+      /*this.value = Math.round(((~~ (((newValue < 0) ? -0.5 : 0.5) + (newValue/this.options.step))) * this.options.step) * 100) / 100;
       if(this.options.step < 1) {
         this.value = parseFloat(this.value.toFixed(1));
-      }
+      }*/
       this.changeArc.endAngle(radians);
       d3.select(this.element).select('#changeArc').attr('d', this.changeArc);
       this.valueArc.endAngle(radians);
       d3.select(this.element).select('#valueArc').attr('d', this.valueArc);
       if(this.options.displayInput) {
-        var v = this.value;
-        if (typeof this.options.inputFormatter === "function"){
-          v = this.options.inputFormatter(v);
-        }
-        d3.select(this.element).select('#text').text(v + this.options.unit || "");
+        var v = this.value.toFixed(0);
+      	if (typeof this.options.inputFormatter === "function"){
+	   v = this.options.inputFormatter(this.value);
+	}else if( this.options.step < 1) {
+	   v = this.value.toFixed(1);
+	}
+        d3.select(this.element).select('#text').text(v + ""+this.options.unit || "");
       }
     }
   };
@@ -440,7 +455,7 @@
           endAngle: 150,
           unit: "",
           displayInput: true,
-          inputFormatter: function(v){ return v; },
+          //inputFormatter: function(v){ return v; },
           readOnly: false,
           trackWidth: 50,
           barWidth: 50,
