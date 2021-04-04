@@ -67,12 +67,8 @@
     .attr('transform', 'translate(' + (300/2) + ', ' + (300/2) + ')');
 
     if(this.options.readOnly === false) {
-      if (click) {
-        elem.on('click', click);
-      }
-      if (drag) {
-        elem.call(drag);
-      }
+      if (click) { elem.on('click', click); }
+      if (drag) { elem.call(drag); }
     }
     return elem;
   };
@@ -310,8 +306,8 @@
     that.createArcs();
 
     var dragBehavior = d3.behavior.drag()
-    .on('drag', dragInteraction)
-    .on('dragend', clickInteraction);
+    .on('drag', dragInteraction);
+    //.on('dragend', clickInteraction); // on('click') is enough... make sure click behavior is always with drag behavior
 
     that.drawArcs(clickInteraction, dragBehavior);
 

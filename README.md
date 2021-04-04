@@ -10,6 +10,9 @@ The thermo-knob connects to 3 openhab items:
 - Current temperature, displayed only
 - Current heating state (0/1), displayed only
 
+## History
+
+- 2021-04-04 fixed double command issue #1
 
 ### Parameters
 
