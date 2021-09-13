@@ -48,7 +48,11 @@ A standalone demo is provided in [thermoKnob/index.html](thermoKnob/index.html)
 This widget relies on static files, which must be installed manually.
 Simply copy the directory thermoKnob into the static html area of openhab.
 
-For openraspbian, just do
+For openraspbian with OH3, just do
+
+`cp -r thermoKnob /etc/openhab/html/`
+
+for OH2, use:
 
 `cp -r thermoKnob /etc/openhab2/html/`
 
