@@ -3,58 +3,65 @@
     "name": "Thermostat Knob",
     "author": "Sébastien Roy",
     "description": "Thermostat Knob, showing current temperature, set point and heating state, with optional label",
+    "id": "thermo-knob",
     "settings": [
         {
-            "type": "string",
             "id": "label",
             "label": "Label",
-            "description": "Label for the widget, if desired"
+            "description": "Label for the widget, if desired",
+            "type": "string"
         },
         {
-            "type": "item",
             "id": "current",
             "label": "Current temperature",
-            "description": "Current temperature item"
+            "description": "Current temperature item",
+            "type": "item"
         },
         {
-            "type": "item",
             "id": "setpoint",
             "label": "Thermostat set point",
-            "description": "Thermostat set point, the value that can be adjusted"
+            "description": "Thermostat set point, the value that can be adjusted",
+            "type": "item"
         },
         {
-            "type": "item",
             "id": "heating",
             "label": "Thermostat heating state",
-            "description": "Thermostat heating state, expecting 0/1 values"
+            "description": "Thermostat heating state, expecting 0/1 values",
+            "type": "item"
         },
         {
-            "type": "string",
             "id": "barcolor",
             "label": "Set Point Color",
             "default": "#FFAE1A",
-            "description": "Color of the set point bar and set point text. (Use #0DB9F0 for standard habpanel blue)"
+            "description": "Color of the set point bar and set point text. (Use #0DB9F0 for standard habpanel blue)",
+            "type": "string"
         },
         {
-            "type": "string",
             "id": "min",
             "label": "Minimum value",
             "description": "Minimum temperature value",
-            "default": "5"
+            "default": "5",
+            "type": "string"
         },
         {
-            "type": "string",
             "id": "max",
             "label": "Maximum value",
             "default": "35",
-            "description": "Maximum temperature value"
+            "description": "Maximum temperature value",
+            "type": "string"
         },
         {
-            "type": "string",
             "id": "step",
             "label": "Step value",
             "default": "1",
-            "description": "Temperature scale steps. One tick will be drawn at each step, from min to max temperature. Suggested values : 1 or 0.5."
+            "description": "Temperature scale steps. One tick will be drawn at each step, from min to max temperature. Suggested values : 1 or 0.5.",
+            "type": "string"
+        },
+        {
+            "id": "readonly",
+            "label": "Read Only",
+            "description": "Is this widget read only?",
+            "type": "checkbox"
         }
     ]
 }

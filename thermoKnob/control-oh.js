@@ -26,6 +26,7 @@ function monControlOH($scope,OHService) {
 	var leMin=hasConfig?parseFloat($scope.config.min):5;
 	var leMax=hasConfig?parseFloat($scope.config.max):35;
 	var leStep=hasConfig?parseFloat($scope.config.step):1;
+	var readonly=hasConfig?($scope.config.readonly==true):false;
 	/*
 	if( hasConfig ) {
 		console.log("Config is "+JSON.stringify(Object.keys($scope.config),null,4));
@@ -43,6 +44,7 @@ function monControlOH($scope,OHService) {
 	//$scope.heating=0; // tracking config.heating
 	$scope.options = {
 		  //size: 300,
+		  readOnly: readonly,
 		  skin: {
 			  type: 'simple',
 			  color: '#919191', //'ff6060' // observed
