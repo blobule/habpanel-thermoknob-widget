@@ -9,9 +9,11 @@ The thermo-knob connects to 3 openhab items:
 - temperature setpoint, which is adjustable
 - Current temperature, displayed only
 - Current heating state (0/1), displayed only
+- Optional "Read-only" mode
 
 ## History
 
+- 2021-10-31 added "read-only" option
 - 2021-04-04 fixed double command issue #1
 
 ### Parameters
